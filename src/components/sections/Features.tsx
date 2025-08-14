@@ -5,8 +5,8 @@ const Features = () => {
   const features = [
     {
       icon: <Bot className="w-8 h-8" />,
-      title: "AI-Powered CV Creation",
-      description: "Advanced AI algorithms craft personalized CVs that highlight your unique strengths and achievements.",
+      title: "Expert CV Creation",
+      description: "Professional writers craft personalized CVs that highlight your unique strengths and achievements.",
       gradient: "from-primary to-primary-glow"
     },
     {
@@ -49,7 +49,7 @@ const Features = () => {
             Why Choose Career Craft?
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            We combine cutting-edge AI technology with deep understanding of the Ghanaian job market 
+            We combine professional expertise with deep understanding of the Ghanaian job market 
             to create CVs that get you noticed by employers.
           </p>
         </div>

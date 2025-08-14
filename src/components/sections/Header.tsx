@@ -1,9 +1,36 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Menu, X, User, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, GraduationCap } from "lucide-react";
-import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { User as SupabaseUser, Session } from '@supabase/supabase-js';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+      }
+    );
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate('/');
+  };
 
   const navItems = [
     { label: "Features", href: "#features" },
@@ -42,12 +69,26 @@ const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost" className="font-medium">
-              Sign In
-            </Button>
-            <Button variant="premium" className="font-semibold">
-              Get Started
-            </Button>
+            {user ? (
+              <>
+                <Button variant="ghost" className="font-medium" onClick={() => navigate('/dashboard')}>
+                  <User className="h-4 w-4 mr-2" />
+                  Dashboard
+                </Button>
+                <Button variant="outline" onClick={handleSignOut}>
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button variant="ghost" className="font-medium" onClick={() => navigate('/auth')}>
+                  Sign In
+                </Button>
+                <Button variant="premium" className="font-semibold" onClick={() => navigate('/auth')}>
+                  Get Started
+                </Button>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -76,12 +117,25 @@ const Header = () => {
               ))}
             </nav>
             <div className="flex flex-col gap-3 pt-4 border-t border-border/50">
-              <Button variant="ghost" className="justify-start font-medium">
-                Sign In
-              </Button>
-              <Button variant="premium" className="justify-start font-semibold">
-                Get Started
-              </Button>
+              {user ? (
+                <>
+                  <Button variant="ghost" className="justify-start font-medium" onClick={() => navigate('/dashboard')}>
+                    Dashboard
+                  </Button>
+                  <Button variant="outline" className="justify-start" onClick={handleSignOut}>
+                    Sign Out
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button variant="ghost" className="justify-start font-medium" onClick={() => navigate('/auth')}>
+                    Sign In
+                  </Button>
+                  <Button variant="premium" className="justify-start font-semibold" onClick={() => navigate('/auth')}>
+                    Get Started
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         )}

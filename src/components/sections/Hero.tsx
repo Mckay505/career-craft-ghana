@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/students-studying-hero.jpg";
 import { ArrowRight, Star, Users, Trophy, BookOpen } from "lucide-react";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -34,8 +36,8 @@ const Hero = () => {
 
           {/* Subheading */}
           <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
-            Transforming Ghanaian students into career-ready professionals with AI-powered CV and resume crafting. 
-            Your gateway to employment success starts here.
+            Submit your details, make payment, and receive professionally crafted CVs and resumes within 48 hours. 
+            Your gateway to employment success in Ghana starts here.
           </p>
 
           {/* Stats */}
@@ -50,13 +52,13 @@ const Hero = () => {
             </div>
             <div className="flex items-center gap-2">
               <BookOpen className="w-5 h-5 text-secondary" />
-              <span className="font-semibold">AI-Powered Crafting</span>
+              <span className="font-semibold">Expert CV Creation</span>
             </div>
           </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button variant="hero" size="lg" className="text-lg px-8 py-4">
+            <Button variant="hero" size="lg" className="text-lg px-8 py-4" onClick={() => navigate('/auth')}>
               Start Your Journey
               <ArrowRight className="w-5 h-5" />
             </Button>

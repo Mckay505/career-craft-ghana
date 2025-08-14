@@ -1,8 +1,10 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight, UserPlus, FileText, Bot, Mail } from "lucide-react";
 
 const Process = () => {
+  const navigate = useNavigate();
   const steps = [
     {
       step: "01",
@@ -21,8 +23,8 @@ const Process = () => {
     {
       step: "03",
       icon: <Bot className="w-8 h-8" />,
-      title: "AI Crafting Magic",
-      description: "Our advanced AI analyzes your information and crafts a professional CV tailored to Ghanaian job market standards.",
+      title: "Professional Crafting",
+      description: "Our expert team crafts your professional CV tailored to Ghanaian job market standards and industry requirements.",
       color: "accent"
     },
     {
@@ -105,7 +107,7 @@ const Process = () => {
               Join the growing community of successful Ghanaian graduates. 
               Your career transformation is just one click away.
             </p>
-            <Button variant="hero" size="lg" className="text-lg px-12 py-4">
+            <Button variant="hero" size="lg" className="text-lg px-12 py-4" onClick={() => navigate('/auth')}>
               Begin Your Career Journey
               <ArrowRight className="w-5 h-5" />
             </Button>

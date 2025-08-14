@@ -14,7 +14,93 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      orders: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string | null
+          id: string
+          payment_method: string | null
+          payment_reference: string | null
+          service_type: string | null
+          status: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          currency?: string | null
+          id?: string
+          payment_method?: string | null
+          payment_reference?: string | null
+          service_type?: string | null
+          status?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string | null
+          id?: string
+          payment_method?: string | null
+          payment_reference?: string | null
+          service_type?: string | null
+          status?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          certificates: string[] | null
+          created_at: string
+          degree: string | null
+          email: string | null
+          full_name: string | null
+          graduation_year: number | null
+          id: string
+          phone: string | null
+          skills: string[] | null
+          university: string | null
+          updated_at: string
+          user_id: string
+          work_experience: string | null
+        }
+        Insert: {
+          certificates?: string[] | null
+          created_at?: string
+          degree?: string | null
+          email?: string | null
+          full_name?: string | null
+          graduation_year?: number | null
+          id?: string
+          phone?: string | null
+          skills?: string[] | null
+          university?: string | null
+          updated_at?: string
+          user_id: string
+          work_experience?: string | null
+        }
+        Update: {
+          certificates?: string[] | null
+          created_at?: string
+          degree?: string | null
+          email?: string | null
+          full_name?: string | null
+          graduation_year?: number | null
+          id?: string
+          phone?: string | null
+          skills?: string[] | null
+          university?: string | null
+          updated_at?: string
+          user_id?: string
+          work_experience?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
